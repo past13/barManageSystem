@@ -1,6 +1,5 @@
 namespace Models
 {
-    using Helper;
     public abstract class Customer
     {
         public int PeopleQuantity { get; set; }
@@ -15,21 +14,9 @@ namespace Models
             return PeopleQuantity * PricePerPerson;
         }
 
-        public virtual string getDiscountByCondition(DiscountModel discountCupon, int customersQuantity, decimal totalAmount) 
+        public virtual decimal getDiscountByCondition(DiscountModel discountCupon, int customersQuantity, decimal totalAmount) 
         {
-            return "base";
+            return totalAmount;
         }
-
-        // public virtual decimal getDiscountByCondition(decimal totalPrice, int discountPercent, int discountByTotalSum)
-        // {
-        //     if (discountPercent > discountByTotalSum) 
-        //     {
-        //         return totalPrice - (totalPrice * discountPercent / Constants.ONEHUNDREDPERCENT);
-        //     } 
-        //     else 
-        //     {
-        //         return totalPrice - (totalPrice * discountByTotalSum / Constants.ONEHUNDREDPERCENT);
-        //     }
-        // }
     }
 }

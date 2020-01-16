@@ -9,11 +9,11 @@ namespace Models
             return base.getTotalPrice();
         }
         
-        public override string getDiscountByCondition(DiscountModel discountCupon, int customersQuantity, decimal totalAmount) 
+        public override decimal getDiscountByCondition(DiscountModel discountCupon, int customersQuantity, decimal totalAmount) 
         {
             if (2500 > totalAmount && totalAmount >= 2000) 
             {
-                return "silver";
+                return totalAmount - (totalAmount * (int)Percents.Ten / (int)Percents.OneHundrend);
             }
 
             return base.getDiscountByCondition(discountCupon, customersQuantity, totalAmount);

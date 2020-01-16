@@ -8,5 +8,8 @@ namespace Helper
         public const int PREVIOUSDISCOUNT = 1;
         public const int ONEHUNDREDPERCENT = 100;
         public const int STARTINDEX = 0; 
+        public const string STARCARD = "STARCARD"; 
+
+        
     }
 }
