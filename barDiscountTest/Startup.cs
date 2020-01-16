@@ -10,10 +10,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Service;
+
 
 namespace barDiscountTest
 {
+    using Repository;
+    using Service;
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -28,6 +30,8 @@ namespace barDiscountTest
         {
             services.AddControllers();
             services.AddScoped<IDiscountService, DiscountService>();
+            services.AddScoped<IDiscountRepository, DiscountRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

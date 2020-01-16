@@ -5,6 +5,17 @@ namespace Repository
     using Models;
     public class DiscountRepository : IDiscountRepository
     {
+        private Dictionary<string, int> couponeDiscountList {get; set;}
+
+        public DiscountRepository()
+        {
+            Dictionary<string, int> couponeDiscountList = new Dictionary<string, int>();
+            
+            couponeDiscountList.Add("NONE", 0);
+            couponeDiscountList.Add("DIS10", 10);
+            couponeDiscountList.Add("STARCARD", 30);
+        }
+
         public IEnumerable<DiscountModel> GetDiscountList()
         {
             List<DiscountModel> discountList = new List<DiscountModel>();
@@ -25,7 +36,8 @@ namespace Repository
            
             discountList.AddRange(new List<DiscountModel>
             {
-                discount1
+                discount1,
+                discount2
             });
 
             return discountList;
@@ -38,12 +50,13 @@ namespace Repository
                 couponeCode = "NONE";
             }
 
-            Dictionary<string, int> discountList = new Dictionary<string, int>();
-            discountList.Add("NONE", 0);
-            discountList.Add("DIS10", 10);
-            discountList.Add("STARCARD", 30);
+            return couponeDiscountList.ContainsKey(couponeCode) ? couponeDiscountList[couponeCode] : 0;
+        }
 
-            return discountList.ContainsKey(couponeCode) ? discountList[couponeCode] : 0;
+        public string InsertCouponeDiscoutToList(string couponeCode, int percentage)
+        {
+            couponeDiscountList.Add(couponeCode, percentage);
+            return "Coupone discount successfully added";
         }
     }
 }

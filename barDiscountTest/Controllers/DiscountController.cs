@@ -14,6 +14,12 @@ namespace barDiscountTest.Controllers
             _service = service;
         }
 
+        [HttpPost("discount")]
+        public string InsertDiscount(string couponeCode, int percentage)
+        {
+            return _service.InsertCouponeDiscoutToList(couponeCode, percentage);
+        }
+
         [HttpGet("bill")]
         public decimal GetBill(int persons, decimal pricePerPerson, string couponeCode)
         {
