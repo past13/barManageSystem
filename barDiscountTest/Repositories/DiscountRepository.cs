@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Repository
 {
@@ -6,13 +8,18 @@ namespace Repository
     using Models;
     public class DiscountRepository : IDiscountRepository
     {
-        private Dictionary<string, int> couponeDiscountList = new Dictionary<string, int>();
+        private List<DiscountModel> couponeDiscountList = new List<DiscountModel>();
 
         public DiscountRepository()
         {
-            couponeDiscountList.Add("NONE", 0);
-            couponeDiscountList.Add("DIS10", 10);
-            couponeDiscountList.Add("STARCARD", 30);
+            DiscountModel discount1 = new DiscountModel
+            {
+                Id = 1,
+                Name = "DIS10",
+                DiscountPercent = 10
+            };
+
+            couponeDiscountList.Add(discount1);
         }
 
         public IEnumerable<DiscountModel> GetDiscountList()
@@ -42,19 +49,27 @@ namespace Repository
             return discountList;
         }
 
-        public int GetDiscountByCouponeCode(string couponeCode)
-        {
-            if (string.IsNullOrWhiteSpace(couponeCode)) 
+        public DiscountModel GetDiscountByCouponeCode(string couponeCode)
+        {      
+            var result = new DiscountModel();   
+
+            var discountObject = couponeDiscountList.FirstOrDefault( x => x.Name.Equals(couponeCode, StringComparison.OrdinalIgnoreCase));
+
+            if (discountObject != null) 
             {
-                couponeCode = Constants.DEFAULTDISCOUNT;
+                result = discountObject;
+            } 
+            else 
+            {
+                result.Name = Constants.DEFAULTDISCOUNT;
             }
 
-            return couponeDiscountList.ContainsKey(couponeCode) ? couponeDiscountList[couponeCode] : 0;
+            return result;
         }
 
         public bool InsertCouponeDiscoutToList(string couponeCode, int percentage)
         {
-            couponeDiscountList.TryAdd(couponeCode, percentage);
+            // couponeDiscountList.TryAdd(couponeCode, percentage);
             return Constants.INSERTED;
         }
     }

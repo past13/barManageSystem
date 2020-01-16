@@ -6,7 +6,7 @@ namespace Repository
     public interface IDiscountRepository
     {
         IEnumerable<DiscountModel> GetDiscountList();
-        int GetDiscountByCouponeCode(string couponeCode);
+        DiscountModel GetDiscountByCouponeCode(string couponeCode);
         bool InsertCouponeDiscoutToList(string couponeCode, int percentage);
     } 
 }

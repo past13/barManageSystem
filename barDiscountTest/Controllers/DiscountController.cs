@@ -52,6 +52,7 @@ namespace barDiscountTest.Controllers
                 return BadRequest("Can not be 0 amount for bill");
             }
 
+            couponeCode = StringValidation.ValidateStringInput(couponeCode);
             var result = _service.GetBill(persons, pricePerPerson, couponeCode);
             return Ok(result);
         }

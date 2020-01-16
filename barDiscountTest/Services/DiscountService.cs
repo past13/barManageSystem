@@ -2,6 +2,7 @@ using System.Linq;
 
 namespace Service
 {
+    using System;
     using Helper;
     using Models;
     using Repository;
@@ -25,6 +26,7 @@ namespace Service
 
             decimal smallestDiff = int.MaxValue;
             int index = Constants.STARTINDEX;
+
             foreach(var disc in discountList) 
             {
                 var temp =  totalSum - disc.PriceRange;
@@ -40,16 +42,21 @@ namespace Service
             return result;
         }
 
-        public decimal GetBill(int persons, decimal pricePerPerson, string couponeCode)
+        public decimal GetBill(int customers, decimal pricePerPerson, string couponeCode)
         {
-            var client = new Client(persons, pricePerPerson);
+            var client = new PlatinumClient(customers, pricePerPerson);
 
-            var totalSum = client.getTotalPrice();
+            var totalAmount = client.getTotalPrice();
 
-            var discountByCoupon = _repository.GetDiscountByCouponeCode(couponeCode);
-            var discountByTotalSum = GetDiscountByTotalAmount(totalSum);
+            var discountObject = _repository.GetDiscountByCouponeCode(couponeCode);
 
-            return client.getDiscount(totalSum, discountByCoupon, discountByTotalSum.DiscountPercent);
+            var discount = client.getDiscountByCondition(discountObject, customers, totalAmount);
+
+            Console.WriteLine(discountObject);
+
+            var discountByTotalSum = GetDiscountByTotalAmount(totalAmount);
+
+            return 10; //client.getDiscount(totalSum, discountByCoupon, discountByTotalSum.DiscountPercent);
         }
     } 
 }
