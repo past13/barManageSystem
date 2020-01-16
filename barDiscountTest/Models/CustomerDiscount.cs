@@ -1,6 +1,6 @@
 namespace Models
 {
-    public class Customer
+    public class CustomerDiscount
     {
         public virtual decimal getDiscount(decimal totalPrice, int discountPercent, int discountByTotalSum)
         {

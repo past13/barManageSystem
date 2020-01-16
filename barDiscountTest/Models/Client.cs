@@ -1,6 +1,6 @@
 namespace Models
 {
-    public class Client : Customer
+    public class Client : CustomerDiscount
     {
         private int PeopleQuantity {get; set;}
         private decimal PricePerPerson {get; set;}
