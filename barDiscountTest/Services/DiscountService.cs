@@ -1,60 +1,27 @@
-using System;
 using System.Linq;
-using System.Collections.Generic;
 
 namespace Service
 {
     using Models;
+    using Repository;
+
     public class DiscountService : IDiscountService
     {
-        public static IEnumerable<DiscountModel> GetDiscountList()
+        private readonly IDiscountRepository _repository;
+        public DiscountService(IDiscountRepository repository)
         {
-            List<DiscountModel> discountList = new List<DiscountModel>();
-            
-            var discount1 = new DiscountModel
-            {
-                Id = 1,
-                PriceRange = 3000,
-                DiscountPercent = 25
-            };
-
-            var discount2 = new DiscountModel
-            {
-                Id = 2,
-                PriceRange = 2500,
-                DiscountPercent = 20
-            };
-           
-            discountList.AddRange(new List<DiscountModel>
-            {
-                discount1
-            });
-
-            return discountList;
+            _repository = repository;
         }
+        
         public static string InsertDiscoutToList() 
         {
 
             return "Inserted";
         }
-        public static int GetDiscountByCouponeCode(string couponeCode)
+
+        public DiscountModel GetDiscountByTotalAmount(decimal totalSum)
         {
-            if (string.IsNullOrWhiteSpace(couponeCode)) 
-            {
-                couponeCode = "NONE";
-            }
-
-            Dictionary<string, int> discountList = new Dictionary<string, int>();
-            discountList.Add("NONE", 0);
-            discountList.Add("DIS10", 10);
-            discountList.Add("STARCARD", 30);
-
-            return discountList.ContainsKey(couponeCode) ? discountList[couponeCode] : 0;
-        }
-
-        public static DiscountModel GetDiscountByTotalAmount(decimal totalSum)
-        {
-            var discountList = GetDiscountList();
+            var discountList = _repository.GetDiscountList();
 
             decimal smallestDiff = int.MaxValue;
             int index = 0;
@@ -79,8 +46,8 @@ namespace Service
 
             var totalSum = client.getTotalPrice();
 
+            var discountByCoupon = _repository.GetDiscountByCouponeCode(couponeCode);
             var discountByTotalSum = GetDiscountByTotalAmount(totalSum);
-            var discountByCoupon = GetDiscountByCouponeCode(couponeCode);
 
             return client.getDiscount(totalSum, discountByCoupon, discountByTotalSum.DiscountPercent);
         }
