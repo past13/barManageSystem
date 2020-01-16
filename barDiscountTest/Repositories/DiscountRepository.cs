@@ -54,7 +54,7 @@ namespace Repository
 
         public bool InsertCouponeDiscoutToList(string couponeCode, int percentage)
         {
-            couponeDiscountList.Add(couponeCode, percentage);
+            couponeDiscountList.TryAdd(couponeCode, percentage);
             return Constants.INSERTED;
         }
     }

@@ -5,7 +5,6 @@ namespace Models
         private int PeopleQuantity {get; set;}
         private decimal PricePerPerson {get; set;}
 
-
         public Client(int persons, decimal pricePerPerson) 
         {
             PeopleQuantity = persons;

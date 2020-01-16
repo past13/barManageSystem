@@ -7,7 +7,8 @@ namespace Helper
     {
         public static string ValidateStringInput(string couponeCode) 
         {
-            return  string.Concat(couponeCode.Where(c => !Char.IsWhiteSpace(c)));
+            couponeCode = couponeCode.ToUpper();
+            return string.Concat(couponeCode.Where(c => !Char.IsWhiteSpace(c)));
         }
     }
 }
