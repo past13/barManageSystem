@@ -40,17 +40,20 @@ namespace barDiscountTest.Controllers
         }
 
         [HttpGet("bill")]
-        public decimal GetBill(int persons, decimal pricePerPerson, string couponeCode)
+        public IActionResult GetBill(int persons, decimal pricePerPerson, string couponeCode)
         {
             if (persons < 0) 
             {
+                return BadRequest("Can not be 0 visitors should be minimum 1");
             }
 
             if (pricePerPerson < 0) 
             {
+                return BadRequest("Can not be 0 amount for bill");
             }
 
-            return _service.GetBill(persons, pricePerPerson, couponeCode);
+            var result = _service.GetBill(persons, pricePerPerson, couponeCode);
+            return Ok(result);
         }
     }
 }

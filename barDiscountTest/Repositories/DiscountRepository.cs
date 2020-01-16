@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 namespace Repository
 {
+    using Helper;
     using Models;
     public class DiscountRepository : IDiscountRepository
     {
@@ -45,7 +46,7 @@ namespace Repository
         {
             if (string.IsNullOrWhiteSpace(couponeCode)) 
             {
-                couponeCode = "NONE";
+                couponeCode = Constants.DEFAULTDISCOUNT;
             }
 
             return couponeDiscountList.ContainsKey(couponeCode) ? couponeDiscountList[couponeCode] : 0;
@@ -54,7 +55,7 @@ namespace Repository
         public bool InsertCouponeDiscoutToList(string couponeCode, int percentage)
         {
             couponeDiscountList.Add(couponeCode, percentage);
-            return true;
+            return Constants.INSERTED;
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Linq;
 
 namespace Service
 {
+    using Helper;
     using Models;
     using Repository;
 
@@ -23,14 +24,14 @@ namespace Service
             var discountList = _repository.GetDiscountList();
 
             decimal smallestDiff = int.MaxValue;
-            int index = 0;
+            int index = Constants.STARTINDEX;
             foreach(var disc in discountList) 
             {
                 var temp =  totalSum - disc.PriceRange;
                 if (smallestDiff > temp)
                 {
                     smallestDiff = disc.PriceRange - totalSum;
-                    index = disc.Id - 1;
+                    index = disc.Id - Constants.PREVIOUSDISCOUNT;
                 }
             }
 
