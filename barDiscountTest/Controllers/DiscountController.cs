@@ -2,6 +2,7 @@
 
 namespace barDiscountTest.Controllers
 {
+    using Helper;
     using Service;
     
     [Produces("application/json")]
@@ -15,9 +16,27 @@ namespace barDiscountTest.Controllers
         }
 
         [HttpPost("discount")]
-        public string InsertDiscount(string couponeCode, int percentage)
+        public IActionResult InsertDiscount(string couponeCode, int percentage)
         {
-            return _service.InsertCouponeDiscoutToList(couponeCode, percentage);
+            if (percentage < 0) 
+            {
+                return BadRequest("Percentage can not be equal zero");
+            }
+
+            if (string.IsNullOrEmpty(couponeCode)) 
+            {
+                return BadRequest("Coupone code can not be empty");
+            }
+
+            couponeCode = StringValidation.ValidateStringInput(couponeCode);
+            if (couponeCode.Length > Constants.MAXCOPOUNELENGTH) 
+            {
+                return BadRequest("Coupone code too long");
+            }
+
+            _service.InsertCouponeDiscoutToList(couponeCode, percentage);
+
+            return Ok("succesfully inserted");
         }
 
         [HttpGet("bill")]

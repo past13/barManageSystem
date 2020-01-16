@@ -7,6 +7,6 @@ namespace Repository
     {
         IEnumerable<DiscountModel> GetDiscountList();
         int GetDiscountByCouponeCode(string couponeCode);
-        string InsertCouponeDiscoutToList(string couponeCode, int percentage);
+        bool InsertCouponeDiscoutToList(string couponeCode, int percentage);
     } 
 }

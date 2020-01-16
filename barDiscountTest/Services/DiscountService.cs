@@ -13,10 +13,9 @@ namespace Service
             _repository = repository;
         }
         
-        public string InsertCouponeDiscoutToList(string couponeCode, int percentage) 
+        public bool InsertCouponeDiscoutToList(string couponeCode, int percentage) 
         {
-            var result = _repository.InsertCouponeDiscoutToList(couponeCode, percentage);
-            return result;
+            return _repository.InsertCouponeDiscoutToList(couponeCode, percentage);
         }
 
         public DiscountModel GetDiscountByTotalAmount(decimal totalSum)
