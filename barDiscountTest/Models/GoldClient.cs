@@ -12,12 +12,12 @@ namespace Models
 
         public override decimal getDiscountByCondition(DiscountModel discountCupon, int customersQuantity, decimal totalAmount) 
         {
-            if (customersQuantity == 4 && discountCupon.Name == Constants.STARCARD) 
+            if (customersQuantity == (int)ClientNumber.Four && discountCupon.Name == Constants.STARCARD) 
             {
                 return totalAmount - (totalAmount * (int)Percents.Thirty / (int)Percents.OneHundrend);
             }
 
-            if (customersQuantity == 2 && discountCupon.Name == Constants.STARCARD) 
+            if (customersQuantity == (int)ClientNumber.Two && discountCupon.Name == Constants.STARCARD) 
             {
                 return totalAmount - (totalAmount * (int)Percents.TwentyFive / (int)Percents.OneHundrend);
             }

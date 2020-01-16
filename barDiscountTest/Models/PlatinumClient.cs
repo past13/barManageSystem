@@ -1,5 +1,6 @@
 namespace Models
 {
+    using Helper;
     public class PlatinumClient : GoldClient
     {
         public PlatinumClient(int persons, decimal pricePerPerson) : base(persons, pricePerPerson) { }
@@ -11,7 +12,7 @@ namespace Models
 
         public override decimal getDiscountByCondition(DiscountModel discountCupon, int customersQuantity, decimal totalAmount) 
         {
-             if (2500 <= totalAmount)
+             if (Constants.MAXAMOUNT <= totalAmount)
              {
                 return totalAmount - (totalAmount * (int)Percents.TwentyFive / (int)Percents.OneHundrend);
              }

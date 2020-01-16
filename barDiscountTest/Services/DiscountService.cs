@@ -2,7 +2,6 @@ using System.Linq;
 
 namespace Service
 {
-    using System;
     using Helper;
     using Models;
     using Repository;
@@ -52,11 +51,10 @@ namespace Service
 
             var discount = client.getDiscountByCondition(discountObject, customers, totalAmount);
 
-            Console.WriteLine(discountObject);
+            //if discount options appears more
+            // var discountByTotalSum = GetDiscountByTotalAmount(totalAmount);
 
-            var discountByTotalSum = GetDiscountByTotalAmount(totalAmount);
-
-            return 10; //client.getDiscount(totalSum, discountByCoupon, discountByTotalSum.DiscountPercent);
+            return discount;
         }
     } 
 }
