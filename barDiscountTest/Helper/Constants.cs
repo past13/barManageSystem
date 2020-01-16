@@ -10,5 +10,7 @@ namespace Helper
         public const int STARTINDEX = 0; 
         public const string STARCARD = "STARCARD";
         public const int MAXAMOUNT = 2500;
+        public const int MIDMOUNT = 2000;
+
     }
 }

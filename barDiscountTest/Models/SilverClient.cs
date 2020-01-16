@@ -1,7 +1,7 @@
 namespace Models
 {
     using Helper;
-    public class SilverClient : Customer
+    public class SilverClient : RegularCustomer
     {
         public SilverClient(int persons, decimal pricePerPerson) : base(persons, pricePerPerson) { }
 
@@ -12,7 +12,7 @@ namespace Models
         
         public override decimal getDiscountByCondition(DiscountModel discountCupon, int customersQuantity, decimal totalAmount) 
         {
-            if (Constants.MAXAMOUNT > totalAmount && totalAmount >= Constants.MAXAMOUNT) 
+            if (Constants.MAXAMOUNT > totalAmount && totalAmount >= Constants.MIDMOUNT) 
             {
                 return totalAmount - (totalAmount * (int)Percents.Ten / (int)Percents.OneHundrend);
             }
