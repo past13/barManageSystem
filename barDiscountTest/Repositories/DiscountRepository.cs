@@ -19,7 +19,18 @@ namespace Repository
                 DiscountPercent = 10
             };
 
-            couponeDiscountList.Add(discount1);
+            DiscountModel discount2 = new DiscountModel
+            {
+                Id = 2,
+                Name = "DIS20",
+                DiscountPercent = 20
+            };
+
+            couponeDiscountList.AddRange(new List<DiscountModel>
+            {
+                discount1,
+                discount2
+            });
         }
 
         public IEnumerable<DiscountModel> GetDiscountList()
@@ -69,7 +80,16 @@ namespace Repository
 
         public bool InsertCouponeDiscoutToList(string couponeCode, int percentage)
         {
-            // couponeDiscountList.TryAdd(couponeCode, percentage);
+            var lastIndex = couponeDiscountList.Last().Id;
+            
+            var newDiscModel = new DiscountModel
+            {
+                Id = lastIndex + 1,
+                Name = couponeCode
+            };
+
+            couponeDiscountList.Add(newDiscModel);
+
             return Constants.INSERTED;
         }
     }
